@@ -1,0 +1,111 @@
+/* Design read: trust-first benefit funnel, mobile, from paid social. Light theme, blue palette.
+   Dials: VARIANCE 3 / MOTION 3 / DENSITY 4. Plain HTML/CSS on purpose (weight budget).
+   System font stack: zero font requests, renders instantly on every phone.
+   Radius system: 12px controls, 16px surfaces, pill only for the hero tag. */
+:root{
+  --accent:#1D5FD1;--accent-ink:#fff;--accent-soft:#EAF1FD;--accent-glow:rgba(29,95,209,.32);
+  --hero:#E6EFFC;--hero-ink:#0F2A5C;--hero-muted:#3F5175;--hl:#1D5FD1;
+  --bg:#F6F9FD;--surface:#fff;--ink:#13213A;--head:#0F2A5C;--muted:#4E5B70;--line:#DCE4F0;
+  --shadow:0 8px 30px rgba(15,42,92,.10);--shadow-sm:0 1px 3px rgba(15,42,92,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);font-weight:600}
+svg{display:block;flex-shrink:0}
+.wrap{max-width:480px;margin:0 auto;padding:0 16px}
+h2,h3{color:var(--head);letter-spacing:-.01em}
+
+/* Hero */
+.top{background:linear-gradient(180deg,#DCE9FB 0%,var(--hero) 100%);color:var(--hero-ink)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:52px;font-weight:700}
+.free{font-size:13px;font-weight:600;color:var(--accent)}
+.hero{padding:12px 0 72px;text-align:center}
+.tag{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:#fff;border:1px solid #C9DAF6;padding:4px 12px;border-radius:99px;margin-bottom:14px}
+h1{font-size:clamp(28px,8vw,36px);line-height:1.12;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--hl)}
+.hero p{color:var(--hero-muted);font-size:15.5px;max-width:320px;margin:0 auto}
+
+/* Quiz */
+.card{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:22px 20px 24px;margin-top:-52px;position:relative}
+.step{display:none}
+.step.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.prog{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:16px}
+.segs{display:flex;gap:4px;flex:1}
+.segs i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.segs i.f{background:var(--accent)}
+.q{font-size:22px;line-height:1.28;font-weight:750;margin-bottom:18px;text-wrap:balance}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:14px 16px;border:2px solid var(--line);border-radius:12px;background:var(--surface);font:inherit;font-size:17px;font-weight:650;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt:focus-visible,.call:focus-visible,.back:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(hover:hover){.opt:hover{border-color:var(--accent)}}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;display:grid;place-items:center}
+.opt.sel .dot{border-color:var(--accent);background:var(--accent)}
+.opt.sel .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-ink)}
+.hint{margin-top:16px;font-size:14px;color:var(--muted);background:var(--bg);border-radius:12px;padding:12px 14px}
+.hint b{color:var(--ink)}
+
+/* Results */
+.res{text-align:center}
+.badge{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;background:var(--accent-soft);color:var(--accent)}
+.res h2{font-size:26px;line-height:1.2;font-weight:800;margin-bottom:8px}
+.res p{font-size:15.5px;color:var(--muted);margin-bottom:20px}
+.call{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:18px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;box-shadow:0 8px 24px var(--accent-glow);transition:transform .1s}
+.call:active{transform:scale(.985)}
+/* The one perpetual motion on the page: draws the eye to the single conversion action */
+.res .call{animation:pulse 2.2s infinite}
+@keyframes pulse{50%{box-shadow:0 8px 36px rgba(29,95,209,.55)}}
+.sub{font-size:14px;color:var(--muted);margin-top:10px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.facts b{display:block;font-size:20px;color:var(--head)}
+.facts span{font-size:12.5px;color:var(--muted);line-height:1.3;display:block}
+.back{display:inline-block;margin-top:16px;font:inherit;font-size:15px;font-weight:600;color:var(--accent);background:none;border:0;cursor:pointer;text-decoration:underline}
+
+/* Below the fold: each section uses a different layout family */
+section{margin-top:40px}
+section>h2{font-size:21px;font-weight:800;margin-bottom:14px}
+
+/* 1. Benefit bento: one wide lead tile, three supporting tiles, two tinted */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.tile{border-radius:16px;padding:16px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.tile b{display:block;font-size:26px;font-weight:800;line-height:1.1;color:var(--head)}
+.tile span{font-size:14px;color:var(--muted)}
+.tile.lead{grid-column:1/-1;background:var(--accent);display:flex;align-items:baseline;gap:12px}
+.tile.lead b{font-size:40px;color:#fff}
+.tile.lead span{color:rgba(255,255,255,.88);font-size:15px}
+.tile.soft{background:var(--accent-soft);box-shadow:none}
+
+/* 2. How it works: vertical timeline, no card */
+.steps{list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 46px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:14px;font-weight:800;display:grid;place-items:center}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:14px;top:34px;bottom:4px;width:2px;background:var(--line)}
+.steps h3{font-size:16.5px;margin-bottom:2px}
+.steps p{font-size:15px;color:var(--muted)}
+
+/* 3. Who qualifies: tinted panel checklist */
+.panel{background:var(--accent-soft);border-radius:16px;padding:8px 18px}
+.checks{list-style:none}
+.checks li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:16px;font-weight:600}
+.checks svg{color:var(--accent);margin-top:3px}
+.note{font-size:14.5px;color:var(--muted);margin-top:12px}
+
+/* 4. FAQ: accordion, no card */
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:16px 32px 16px 0;font-weight:700;font-size:16px;color:var(--head);position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:24px;font-weight:400;color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{font-size:15px;color:var(--muted);padding:0 0 16px}
+
+footer{margin-top:40px;padding:20px 0 110px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center}
+
+/* Sticky call bar, only after qualifying */
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease;z-index:10}
+.sticky.show{transform:none}
+.sticky .call{max-width:448px;margin:0 auto;padding:15px;font-size:17px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

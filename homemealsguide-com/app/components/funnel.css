@@ -1,0 +1,19 @@
+/*
+ * app/globals.css sets `a` and `img` styles outside any cascade layer, and
+ * unlayered CSS beats every Tailwind v4 utility. On the funnel pages that would
+ * cancel classes like `underline`, `text-[#5b8ab5]` on links or `max-w-[180px]`
+ * on logos. `revert-layer` hands those properties back to Tailwind here only.
+ *
+ * :where() keeps this at plain element specificity, so it only outranks the
+ * bare `a`/`img` rules in globals.css (loaded earlier) and never a class rule
+ * such as `.chat-quiz__image` in quiz.css.
+ */
+:where(.funnel-root) a {
+  color: revert-layer;
+  text-decoration: revert-layer;
+}
+
+:where(.funnel-root) img {
+  display: revert-layer;
+  max-width: revert-layer;
+}
